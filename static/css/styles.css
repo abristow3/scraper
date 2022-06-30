@@ -1,0 +1,111 @@
+html, body {
+    color: mintcream;
+    height: 100%;
+    margin: 0;
+}
+
+#background_video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+#body-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#titles-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 72px;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+}
+
+#subtitles {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-size: 24px;
+    justify-content: space-around;
+    font-family: 'Orbitron', sans-serif;
+
+}
+
+#json-subtitle, #csv-subtitle {
+    width: 30%
+}
+
+
+#buttons-div {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+}
+
+#json-button-div {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+#csv-button-div {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+#json-button {
+    background-color: brown;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 2px solid rosybrown;
+}
+
+#csv-button {
+    background-color: blue;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
+    border: 2px solid cornflowerblue;
+}
+
+#csv-button:hover {
+    background-color: cornflowerblue;
+    border-color: blue;
+}
+
+#json-button:hover {
+    background-color: rosybrown;
+    border-color: brown;
+}
+
+a:link, a:visited {
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+a {
+    font-size: 24px;
+    padding: 10px 20px;
+}

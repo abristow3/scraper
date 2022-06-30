@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Let's Scrape!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Orbitron:wght@600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+</head>
+<body>
+
+<div id="body-container">
+    <video autoplay muted loop id="background_video">
+        <source src="../static/files/matrix.mp4" type="video/mp4">
+    </video>
+    <div id="titles-container">
+        <div id="title-div"><span id="title">Let's Scrape!</span></br>
+        </div>
+    </div>
+    <div id="subtitles">
+        <div id="json-subtitle">You take the red pill, you stay in Wonderland and I show you how deep the rabbit hole goes.</div>
+        <div id="csv-subtitle">You take the blue pill, the story ends; you wake up in your bed and believe whatever you want to believe.</div>
+    </div>
+    <div id="buttons-div">
+
+        <div id="json-button-div">
+            <button id="json-button"><a id="json-anchor" href="{{url_for('config.download')}}">JSON</a></button>
+        </div>
+        <div id="csv-button-div">
+            <button id="csv-button"><a id="csv-anchor" href="{{url_for('config.download')}}">CSV</a></button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
