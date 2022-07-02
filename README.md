@@ -32,10 +32,8 @@ unzip the scraper.zip file
 
 open terminal and cd to root of project
 
-create virtual and activate environment:</br>
-
 ### For Linux + macOS, run these commands in order:
-
+create and activate virtual environment:</br>
 ```
 python3 -m ensurepip --upgrade
 ```
@@ -47,6 +45,7 @@ python3 -m venv venv
 ```
 source venv/bin/activate
 ```
+Install requirements
 
 if running NOT unit tests run this command:
 
@@ -61,6 +60,7 @@ python3 -m pip install -r requirements-dev.txt
 ```
 
 ### For Windows:
+create and activate virtual environment:</br>
 
 ```
 python -m ensurepip --upgrade
@@ -73,6 +73,7 @@ python -m venv venv
 ```
 venv\Scripts\activate.bat
 ```
+Install requirements
 
 if running NOT unit tests run this command:
 
