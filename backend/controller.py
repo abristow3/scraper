@@ -16,9 +16,9 @@ def index():
 # serves static file as a download
 @controller.get('/download-json')
 def download_json():
+    path = 'static/files/posts.json'
     data = scraper()
-    export_json(data)
-    path = "static/files/posts.json"
+    export_json(data, path)
     return send_file(path, as_attachment=True)
 
 
@@ -28,7 +28,7 @@ def download_json():
 # serves static file as a download
 @controller.get('/download-csv')
 def download_csv():
+    path = 'static/files/posts.csv'
     data = scraper()
-    export_csv(data)
-    path = "static/files/posts.csv"
+    export_csv(data, path)
     return send_file(path, as_attachment=True)

@@ -29,18 +29,18 @@ def scraper():
 
 
 # takes in formatted data list, gets all keys, writes into csv file
-def export_csv(formatted_data):
+def export_csv(formatted_data, path):
     csv_data = formatted_data
 
     keys = formatted_data[0].keys()
 
-    with open('static/files/posts.csv', 'w', newline='') as file:
+    with open(path, 'w', newline='') as file:
         dict_writer = csv.DictWriter(file, keys)
         dict_writer.writeheader()
         dict_writer.writerows(csv_data)
 
 
 # takes in formatted data list, writes into json file
-def export_json(formatted_data):
-    with open('static/files/posts.json', 'w') as file:
+def export_json(formatted_data, path):
+    with open(path, 'w') as file:
         json.dump(formatted_data, file)
