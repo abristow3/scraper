@@ -1,31 +1,29 @@
-from backend.scraper_util import build_full_url, format_data, get_data
+from backend.scraper_util import build_full_urls, get_data
 import csv
 import json
 
 
-# forum is paginated with 15 posts per page
-# start is our query param to change pages, declare start at 0 to start on first page
-# set post_dates to True to start while loop, loop exists as soon as post_dates returns None due to empty page
-# loop sets params, builds full url, calls get_data(full_url)
-# calls format data to pull out values and extend formatted_data list
-# increments start by 15 to go to next page
-# returns formatted_data list of dicts.
 def scraper():
     formatted_data = []
-    start = 0
+
+    # forum is paginated with 15 posts per page
+    # start is a list of 5 indices which contain multiples of 15 starting at 0 and incrementing by 15 in each index
+    start = [0, 15, 30, 45, 60]
     base_url = f'https://www.oldclassiccar.co.uk'
     path = '/forum/phpbb/phpBB2/viewtopic.php?'
+    params = f't=12591&start='
 
     post_dates = True
 
     while post_dates:
-        params = f't=12591&start={start}'
-        full_url = build_full_url(base_url, path, params)
+        # call build_full_urls which returns a list of 5 urls whose params = start=start[x]
+        urls = build_full_urls(base_url, path, params, start)
 
-        post_details, post_bodies, post_dates = get_data(full_url)
-        formatted_data.extend(format_data(post_details, post_bodies, post_dates))
+        # calls get data and receives a formatted_data list and post_dates for boolean check
+        formatted_data, post_dates = get_data(urls, formatted_data, post_dates)
 
-        start += 15
+        # list comprehension for start to increment each index by 75 (unrolling loop 5 times essentially)
+        start = [x + 75 for x in start]
 
     return formatted_data
 
