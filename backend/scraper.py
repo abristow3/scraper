@@ -1,27 +1,36 @@
-import requests
-from bs4 import BeautifulSoup
-from backend.scraper_util import validate_post_bodies, validate_post_dates, format_data
+from backend.scraper_util import build_full_url, format_data, get_data
 import csv
 import json
 
 
-# for pagination keep checking is <a>"Next" is true,
-# #and if so get link and request it
+# forum is paginated with 15 posts per page
+# start is our query param to change pages, declare start at 0 to start on first page
+# set post_dates to True to start while loop, loop exists as soon as post_dates returns None due to empty page
+# loop sets params, builds full url, calls get_data(full_url)
+# calls format data to pull out values and extend formatted_data list
+# increments start by 15 to go to next page
+# returns formatted_data list of dicts.
 def scraper():
-    url = 'https://www.oldclassiccar.co.uk/forum/phpbb/phpBB2/viewtopic.php?t=12591/'
-    page = requests.get(url)
+    formatted_data = []
+    start = 0
+    base_url = f'https://www.oldclassiccar.co.uk'
+    path = '/forum/phpbb/phpBB2/viewtopic.php?'
 
-    soup = BeautifulSoup(page.content, 'html.parser')
+    post_dates = True
 
-    post_details = soup.find_all('span', {'class': 'name'})
-    post_bodies = validate_post_bodies(soup.find_all('span', {'class': 'postbody'}))
-    post_dates = validate_post_dates(soup.find_all('span', {'class': 'postdetails'}))
+    while post_dates:
+        params = f't=12591&start={start}'
+        full_url = build_full_url(base_url, path, params)
 
-    formatted_data = format_data(post_details, post_bodies, post_dates)
+        post_details, post_bodies, post_dates = get_data(full_url)
+        formatted_data.extend(format_data(post_details, post_bodies, post_dates))
+
+        start += 15
 
     return formatted_data
 
 
+# takes in formatted data list, gets all keys, writes into csv file
 def export_csv(formatted_data):
     csv_data = formatted_data
 
@@ -33,6 +42,7 @@ def export_csv(formatted_data):
         dict_writer.writerows(csv_data)
 
 
+# takes in formatted data list, writes into json file
 def export_json(formatted_data):
     with open('static/files/posts.json', 'w') as file:
         json.dump(formatted_data, file)
